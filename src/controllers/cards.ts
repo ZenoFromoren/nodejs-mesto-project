@@ -12,9 +12,9 @@ export const createCard = (req: Request, res: Response, next: NextFunction) => {
   const { name, link } = req.body;
 
   return Card.create({ name, link, owner: res.locals.user._id })
-    .then((card) => res.send(card))
+    .then((card) => res.status(statusCodes.CREATED).send(card))
     .catch((err) => {
-      if (err.statusCode === statusCodes.invalidData) {
+      if (err.statusCode === statusCodes.BAD_REQUEST) {
         return next(new BadRequestError('Неверные данные карточки'));
       }
 
