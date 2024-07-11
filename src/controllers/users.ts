@@ -21,9 +21,9 @@ export const createUser = (req: Request, res: Response, next: NextFunction) => {
   const { name, about, avatar } = req.body;
 
   return User.create({ name, about, avatar })
-    .then((user) => res.send(user))
+    .then((user) => res.status(statusCodes.CREATED).send(user))
     .catch((err) => {
-      if (err.statusCode === statusCodes.invalidData) {
+      if (err.statusCode === statusCodes.BAD_REQUEST) {
         return next(new BadRequestError('Неверные данные пользователя'));
       }
 

@@ -15,7 +15,7 @@ router.get(
   '/:userId',
   celebrate({
     params: {
-      userId: Joi.string().alphanum().required(),
+      userId: Joi.string().alphanum().length(24).required(),
     },
   }),
   getUserById,
