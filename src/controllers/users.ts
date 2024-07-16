@@ -41,7 +41,14 @@ export const createUser = (req: Request, res: Response, next: NextFunction) => {
         password: hash,
       },
     ))
-    .then((user) => res.status(statusCodes.CREATED).send(user))
+    .then(() => {
+      res.status(statusCodes.CREATED).send({
+        name,
+        about,
+        avatar,
+        email,
+      });
+    })
     .catch((err) => {
       if (err.code === 11000) {
         return next(
