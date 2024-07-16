@@ -9,31 +9,34 @@ interface ICard {
   createdAt: Date;
 }
 
-const cardSchema = new mongoose.Schema<ICard>({
-  name: {
-    type: String,
-    required: true,
-    minlength: 2,
-    maxlength: 30,
-  },
-  link: {
-    type: String,
-    required: true,
-  },
-  owner: {
-    type: ObjectId,
-    required: true,
-  },
-  likes: [
-    {
-      type: ObjectId,
-      default: [],
+const cardSchema = new mongoose.Schema<ICard>(
+  {
+    name: {
+      type: String,
+      required: true,
+      minlength: 2,
+      maxlength: 30,
     },
-  ],
-  createdAt: {
-    type: Date,
-    default: Date.now(),
+    link: {
+      type: String,
+      required: true,
+    },
+    owner: {
+      type: ObjectId,
+      required: true,
+    },
+    likes: [
+      {
+        type: ObjectId,
+        default: [],
+      },
+    ],
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+    },
   },
-});
+  { versionKey: false },
+);
 
 export default mongoose.model<ICard>('card', cardSchema);
