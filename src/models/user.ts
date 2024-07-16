@@ -15,7 +15,7 @@ interface IUserModel extends mongoose.Model<IUser> {
   findUserByCredentials: (
     email: string,
     password: string
-  ) => Promise<mongoose.Document<IUser>>;
+  ) => Promise<mongoose.Document<unknown, any, IUser>>;
 }
 
 const userSchema = new mongoose.Schema<IUser, IUserModel>(
